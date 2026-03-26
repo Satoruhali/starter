@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cocktail Explorer — consolidation w09</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Cocktail Explorer</h1>
+      <p class="tagline">Recherche et fiche détail — semaine bilan</p>
+    </header>
+
+    <main>
+      <section class="search-section" aria-labelledby="search-heading">
+        <h2 id="search-heading">Rechercher un cocktail</h2>
+        <form id="search-form" class="search-form">
+          <label for="query">Nom ou mot-clé</label>
+          <input
+            type="search"
+            id="query"
+            name="query"
+            autocomplete="off"
+            placeholder="ex. margarita"
+            minlength="2"
+          />
+          <button type="submit">Rechercher</button>
+        </form>
+      </section>
+
+      <!-- Zone messages / états : chargement, erreur, vide — à piloter depuis script.js -->
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <section class="results-section" aria-labelledby="results-heading">
+        <h2 id="results-heading" class="visually-hidden">Résultats</h2>
+        <div id="results" class="results cards"></div>
+      </section>
+
+      <section class="detail-section" aria-labelledby="detail-heading">
+        <h2 id="detail-heading">Détail</h2>
+        <article id="detail" class="detail">
+          <p class="detail-placeholder">Sélectionne un cocktail dans les résultats.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Données : <a href="https://www.thecocktaildb.com/">TheCocktailDB</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
