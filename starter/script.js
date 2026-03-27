@@ -90,12 +90,4 @@ formulaire.addEventListener("submit", async (event) => {
 
 
 
-  
-
-
-
-
-
-
-
 
