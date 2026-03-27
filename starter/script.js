@@ -56,56 +56,24 @@ formulaire.addEventListener("submit", async (event) => {
       
 
       card.addEventListener("click", async () => {
-        detail.innerHTML = "<p>Chargement...</p>";
-
         const lookupUrl = API_LOOKUP + encodeURIComponent(drink.idDrink);
 
         try {
           const response = await fetch(lookupUrl);
-          if (!response.ok) throw new Error("Erreur API (lookup)");
-
           const data = await response.json();
-          let d;
 
-          if (data.drinks && data.drinks.length > 0) {
-            d = data.drinks[0];
-          } else {
-            d = null; // ou undefined
-          }
-
-          const ingredients = [];
-          for (let i = 1; i <= 15; i++) {
-            const ing = d["strIngredient" + i];
-            const meas = d["strMeasure" + i];
-
-            if (ing && ing.trim() !== "") {
-             
-              const parts = [];
-              if (meas && meas.trim() !== "") parts.push(meas.trim());
-              parts.push(ing.trim());
-            
-              const line = parts.join(" ");
-              ingredients.push(`<li>${line}</li>`);
-            }
-          }
-
-          if (!d) {
-            detail.innerHTML = "<p>Détail introuvable.</p>";
+          if (!data.drinks || data.drinks.length === 0) {
+            detail.textContent = "Détail introuvable.";
             return;
           }
 
-          const instructions = (d.strInstructionsFR || d.strInstructions || "").trim();
+          const d = data.drinks[0];
+          const instructions = d.strInstructionsFR || d.strInstructions || "—";
 
-          detail.innerHTML = `
-            <h3>${d.strDrink}</h3>
-            <h4>Ingrédients</h4>
-            <ul>${ingredients.join("")}</ul>
-            <h4>Instructions</h4>
-            <p>${instructions || "—"}</p>
-          `;
+          detail.innerHTML = "<h3>" + d.strDrink + "</h3><p>" + instructions + "</p>";
         } catch (error) {
           console.error(error);
-          detail.innerHTML = "<p>Erreur lors du chargement du détail.</p>";
+          detail.textContent = "Erreur lors du chargement du détail.";
         }
       });
 
